@@ -7,6 +7,7 @@ export type TownStage = {
   name: string; // 段階の名前
   emoji: string; // 画面に出す絵文字
   minPoints: number; // この段階になるのに必要なポイント
+  description: string; // 画面に出す説明
 };
 
 /** 最初の段階（0 pt のとき） */
@@ -15,19 +16,20 @@ const FIRST_STAGE: TownStage = {
   name: "あれ地",
   emoji: "🏜️",
   minPoints: 0,
+  description: "まだ何もない土地。",
 };
 
-/** 成長段階の一覧（minPoints の小さい順に並べること） */
+/**
+ * 成長段階の一覧（minPoints の小さい順に並べること）
+ * クイズは正解で「難易度×10pt」入るので、1回のプレイ（10〜12問）で最後まで育つかどうかの境目にしている。
+ */
 export const TOWN_STAGES: readonly TownStage[] = [
   FIRST_STAGE,
-  { level: 1, name: "草が生えた", emoji: "🌱", minPoints: 10 },
-  { level: 2, name: "木が育った", emoji: "🌳🌳", minPoints: 30 },
-  { level: 3, name: "小さな村", emoji: "🏡🌳🌻", minPoints: 60 },
-  { level: 4, name: "エコな街", emoji: "🏙️🌳🚲☀️", minPoints: 100 },
+  { level: 1, name: "草が生えた", emoji: "🌱", minPoints: 30, description: "緑が少しずつ戻ってきた。" },
+  { level: 2, name: "木が育った", emoji: "🌳🌳", minPoints: 80, description: "木が育ち、鳥がやってきた。" },
+  { level: 3, name: "小さな村", emoji: "🏡🌳🌻", minPoints: 150, description: "人が住み始め、畑と公園ができた。" },
+  { level: 4, name: "エコな街", emoji: "🏙️🌳🚲☀️", minPoints: 250, description: "再生可能エネルギーで動く街が完成した。" },
 ];
-
-/** 1回のエコ行動でもらえるポイント */
-export const POINTS_PER_ACTION = 10;
 
 /**
  * ポイントを加算する。
