@@ -18,9 +18,11 @@ describe("getTownStage", () => {
   });
 
   it("ちょうど境目の値で次の段階になる", () => {
-    expect(getTownStage(9).level).toBe(0);
-    expect(getTownStage(10).level).toBe(1);
-    expect(getTownStage(30).level).toBe(2);
+    expect(getTownStage(29).level).toBe(0);
+    expect(getTownStage(30).level).toBe(1);
+    expect(getTownStage(80).level).toBe(2);
+    expect(getTownStage(150).level).toBe(3);
+    expect(getTownStage(250).level).toBe(4);
   });
 
   it("最大より多くても最大段階のまま", () => {
@@ -30,11 +32,11 @@ describe("getTownStage", () => {
 
 describe("pointsToNextStage", () => {
   it("次の段階までの残りを返す", () => {
-    expect(pointsToNextStage(0)).toBe(10);
-    expect(pointsToNextStage(15)).toBe(15);
+    expect(pointsToNextStage(0)).toBe(30);
+    expect(pointsToNextStage(45)).toBe(35);
   });
 
   it("最大段階なら null", () => {
-    expect(pointsToNextStage(100)).toBeNull();
+    expect(pointsToNextStage(250)).toBeNull();
   });
 });
